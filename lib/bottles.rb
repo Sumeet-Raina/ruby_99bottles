@@ -1,13 +1,16 @@
 class Bottles
-  def verse(num)
-    if num == 0
-      "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
-    elsif num == 1
-      "#{num} bottle of beer on the wall, #{num} bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-    elsif num == 2
-      "#{num} bottles of beer on the wall, #{num} bottles of beer.\nTake one down and pass it around, #{num - 1} bottle of beer on the wall.\n"
-    else
-      "#{num} bottles of beer on the wall, #{num} bottles of beer.\nTake one down and pass it around, #{num - 1} bottles of beer on the wall.\n"
-    end
+  def song
+    verses(99, 0)
   end
+
+  def verses(hi, lo)
+    hi.downto(lo).map {|n| verse(n) }.join("\n")
+  end
+
+  def verse(n)
+    "#{n == 0 ? 'No more' : n} bottle#{'s' if n != 1}" +
+    " of beer on the wall, " +
+    "#{n == 0 ? 'no more' : n} bottle#{'s' if n != 1} of beer.\n" + "#{n > 0 ? "Take #{n > 1 ? 'one' : 'it'} down and pass it around" : "Go to the store and buy some more"}, " + "#{n-1 < 0 ? 99 : n-1 == 0 ? 'no more' : n-1} bottle#{'s' if n-1 != 1}" + " of beer on the wall.\n"
+  end
+
 end
